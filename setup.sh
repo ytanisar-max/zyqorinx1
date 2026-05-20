@@ -8,6 +8,22 @@ start_keep_alive() {
     # Run Python's built-in HTTP server in the background
     python3 -m http.server 8080 > /dev/null 2>&1 &
     echo -e "\e[1;32m[✓] Keep-Alive Web Server is now listening on port 8080.\e[0m"
+    
+    # === AUTOMATED WEB PREVIEW LINK GENERATOR ===
+    # This automatically builds your unique 24/7 Uptime Robot Link!
+    if [ -n "$IDX_WORKSPACE_ID" ]; then
+        echo ""
+        echo -e "\e[1;34m==================================================\e[0m"
+        echo -e "\e[1;32m       YOUR COPY-PASTE 24/7 UPTIME ROBOT LINK:    \e[0m"
+        echo -e "\e[1;36m https://8080-$IDX_WORKSPACE_ID.idx.dev/ \e[0m"
+        echo -e "\e[1;34m==================================================\e[0m"
+        echo ""
+    else
+        echo ""
+        echo -e "\e[1;31m[-] Could not auto-detect Workspace ID.\e[0m"
+        echo -e "\e[1;33m[!] Please use your manual Web Preview feature instead.\e[0m"
+        echo ""
+    fi
 }
 
 # Clear terminal and show your branding
@@ -22,7 +38,7 @@ echo -e "[\e[1;32m2\e[0m] 24/7 Minecraft Server Setup"
 echo ""
 read -p "Enter your choice (1 or 2): " main_choice
 
-# Activate the Keep-Alive Web Server
+# Activate the Keep-Alive Web Server & Print the Live Link
 start_keep_alive
 
 if [ "$main_choice" -eq 1 ]; then
